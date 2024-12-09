@@ -17,6 +17,10 @@ let make = (
   ~disabled=false,
   ~placeholderText,
   ~items: array<customPickerType>,
+  ~height=46.,
+  ~animate=true,
+  ~mandatory=false,
+  ~heading="",
   ~isValid=true,
 ) => {
   let (isModalVisible, setIsModalVisible) = React.useState(_ => false)
@@ -56,6 +60,10 @@ let make = (
         borderTopLeftRadius=borderRadius
         borderTopRightRadius=borderRadius
         placeholder=placeholderText
+        height
+        animate
+        heading
+        mandatory
         editable=false
         textColor=component.color
         iconRight=CustomIcon(

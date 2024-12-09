@@ -19,25 +19,68 @@ try {
 app.get('/create-payment-intent', async (req, res) => {
   try {
     var paymentIntent = await hyper.paymentIntents.create({
-      amount: 2999,
-      currency: 'USD',
-      authentication_type: 'no_three_ds',
-      customer_id: 'hyperswitch_demo_id',
-      capture_method: 'automatic',
-      email: 'abc@gmail.com',
-      billing: {
-        address: {
-          line1: '1467',
-          line2: 'Harrison Street',
-          line3: 'Harrison Street',
-          city: 'San Fransico',
-          state: 'California',
-          zip: '94122',
-          country: 'PL',
-          first_name: 'joseph',
-          last_name: 'Doe',
+      "amount": 6500,
+      "order_details": [
+        {
+          "product_name": "Apple iphone 15",
+          "quantity": 1,
+          "amount": 6500
+        }
+      ],
+      "currency": "USD",
+      "confirm": false,
+      "capture_method": "automatic",
+      "authentication_type": "three_ds",
+      "setup_future_usage": "on_session",
+      "request_external_three_ds_authentication": false,
+      "email": "user@gmail.com",
+      "description": "Hello this is description",
+      "profile_id": "pro_E6k4XxWE3fVzTIYDMzJa",
+      "shipping": {
+        "address": {
+          "state": "California",
+          "city": "Banglore",
+          "country": "US",
+          "line1": "sdsdfsdf",
+          "line2": "hsgdbhd",
+          "line3": "alsksoe",
+          "zip": "571201",
+          "first_name": "John",
+          "last_name": "Doe"
+        },
+        "phone": {
+          "number": "123456789",
+          "country_code": "+1"
         }
       },
+      "connector_metadata": {
+        "noon": {
+          "order_category": "applepay"
+        }
+      },
+      "metadata": {
+        "udf1": "value1",
+        "new_customer": "true",
+        "login_date": "2019-09-10T10:11:12Z"
+      },
+      "billing": {
+        "address": {
+          "line1": "1467",
+          "line2": "Harrison Street",
+          "line3": "Harrison Street",
+          "city": "San Fransico",
+          "state": "California",
+          "zip": "94122",
+          "country": "US",
+          "first_name": "joseph",
+          "last_name": "Doe"
+        },
+        "phone": {
+          "number": "8056594427",
+          "country_code": "+91"
+        }
+      },
+      "customer_id": "hyperswitch_sdk_demo_id"
     });
 
     // Send publishable key and PaymentIntent details to client

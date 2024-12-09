@@ -257,6 +257,7 @@ type sdkState =
   | CustomWidget(payment_method_type_wallet)
   | ExpressCheckoutWidget
   | PaymentMethodsManagement
+  | AddressElement
   | WidgetPaymentSheet
   | Headless
   | NoView
@@ -286,6 +287,7 @@ let sdkStateToStrMapper = sdkState => {
   | CustomWidget(str) => str->widgetToStrMapper
   | ExpressCheckoutWidget => "EXPRESS_CHECKOUT_WIDGET"
   | PaymentMethodsManagement => "PAYMENT_METHODS_MANAGEMENT"
+  | AddressElement => "ADDRESS_ELEMENT"
   | WidgetPaymentSheet => "WIDGET_PAYMENT"
   | Headless => "HEADLESS"
   | NoView => "NO_VIEW"
@@ -885,7 +887,7 @@ let nativeJsonToRecord = (jsonFromNative, rootTag) => {
   }
 
   let hyperParams = getObj(dictfromNative, "hyperParams", Dict.make())
-
+  Console.log("xz")
   {
     from,
     env: GlobalVars.checkEnv(publishableKey),
@@ -898,7 +900,7 @@ let nativeJsonToRecord = (jsonFromNative, rootTag) => {
     customBackendUrl,
     customLogUrl,
     sessionId: "",
-    sdkState: switch getString(dictfromNative, "type", "") {
+    sdkState: switch "addressElement" {
     | "payment" => PaymentSheet
     | "hostedCheckout" => HostedCheckout
     | "google_pay" => CustomWidget(GOOGLE_PAY)
@@ -908,6 +910,7 @@ let nativeJsonToRecord = (jsonFromNative, rootTag) => {
     | "paymentMethodsManagement" => PaymentMethodsManagement
     | "expressCheckout" => ExpressCheckoutWidget
     | "headless" => Headless
+    | "addressElement" => AddressElement
     | _ => NoView
     },
     configuration: parseConfigurationDict(configurationDict, from),

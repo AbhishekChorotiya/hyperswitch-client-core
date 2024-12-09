@@ -34,8 +34,12 @@ module App = {
   }
 }
 
+
+
 @react.component
 let make = (~props, ~rootTag) => {
+  // CustomLogger.log(props)
+  
   <ErrorBoundary rootTag level=FallBackScreen.Top>
     <ContextWrapper props rootTag>
       <App />

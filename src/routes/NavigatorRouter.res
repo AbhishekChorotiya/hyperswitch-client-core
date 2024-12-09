@@ -122,6 +122,7 @@ let make = () => {
     | CustomWidget(walletType) => <CustomWidget walletType />
     | ExpressCheckoutWidget => <ExpressCheckoutWidget />
     | WidgetPaymentSheet => <ParentPaymentSheet />
+    | AddressElement => <ParentPaymentSheet />
     | Headless
     | NoView
     | PaymentMethodsManagement => React.null
